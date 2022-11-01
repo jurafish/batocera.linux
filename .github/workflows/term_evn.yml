@@ -24,3 +24,6 @@ jobs:
 
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
+        
+      - name: Push image
+        run: docker push batoceralinux/batocera.linux-build
