@@ -19,9 +19,14 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USER_NAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
     
-      - name: Checkout
+      - name: Checkout batocera.linux
         uses: actions/checkout@v3
-
+      - name: Checkout Buildroot
+        uses: actions/checkout@v3
+        with:
+          repository: jurafish/buildroot
+          path: buildroot
+          
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
         
