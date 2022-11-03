@@ -26,13 +26,16 @@ jobs:
         with:
           repository: jurafish/buildroot
           path: buildroot
-#      - name: Build ToolChain
-#        run: |
-#          set -xe
-#          make s912-toolchain
-        
+      - name: Makedir DL
+        run: |
+          make dl-dir
+          sudo chown -R runner:docker dl/
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
+          
+      - name: Build ToolChain
+        run:  make s912-toolchain
+        
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
