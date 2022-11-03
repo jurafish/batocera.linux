@@ -89,7 +89,7 @@ dl-dir:
 	@for opt in $(EXTRA_OPTS); do \
 		echo $$opt >> $(PROJECT_DIR)/configs/batocera-$*_defconfig ; \
 	done
-	@$(DOCKER) run -t --init --rm \
+	@$(DOCKER) run --init --rm \
 		-v $(PROJECT_DIR):/build \
 		-v $(DL_DIR):/build/buildroot/dl \
 		-v $(OUTPUT_DIR)/$*:/$* \
@@ -101,7 +101,7 @@ dl-dir:
 		make O=/$* BR2_EXTERNAL=/build -C /build/buildroot batocera-$*_defconfig
 
 %-build: batocera-docker-image %-config ccache-dir dl-dir
-	@$(DOCKER) run -t --init --rm \
+	@$(DOCKER) run --init --rm \
 		-v $(PROJECT_DIR):/build \
 		-v $(DL_DIR):/build/buildroot/dl \
 		-v $(OUTPUT_DIR)/$*:/$* \
