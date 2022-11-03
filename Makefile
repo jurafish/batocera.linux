@@ -214,9 +214,9 @@ dl-dir:
 	-@rmdir /tmp/mount
 
 %-toolchain: %-supported
-	$(if $(shell which btrfs 2>/dev/null),, $(error "btrfs not found!"))
-	-@sudo btrfs sub del $(OUTPUT_DIR)/$*
-	@btrfs subvolume create $(OUTPUT_DIR)/$*
+	#$(if $(shell which btrfs 2>/dev/null),, $(error "btrfs not found!"))
+	#-@sudo btrfs sub del $(OUTPUT_DIR)/$*
+	#@btrfs subvolume create $(OUTPUT_DIR)/$*
 	@$(MAKE) $*-config
 	@$(MAKE) $*-build CMD=toolchain
 	@$(MAKE) $*-build CMD=llvm
