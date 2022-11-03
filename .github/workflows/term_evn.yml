@@ -27,7 +27,9 @@ jobs:
           repository: jurafish/buildroot
           path: buildroot
       - name: Build ToolChain
-        run: make s912-toolchain
+        run: |
+          set -xe
+          make s912-toolchain
         
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
