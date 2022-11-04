@@ -30,12 +30,12 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
-          
-      - name: Build ToolChain
-        run:  make s912-build
-        
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
+          
+      - name: Build
+        run:  make s912-build
+        
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
