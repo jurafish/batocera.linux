@@ -32,8 +32,8 @@ jobs:
           sudo chown -R runner:docker dl/
           sudo umount -l /tmp
           
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+  #    - name: Setup Debug Session
+  #      uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
