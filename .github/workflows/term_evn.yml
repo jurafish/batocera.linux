@@ -31,7 +31,6 @@ jobs:
           make dl-dir
           sudo chown -R runner:docker dl/
           echo "hello download" >> dl/download.txt
-          echo "hello output" >> output/output.txt
           sudo umount -l /tmp
           
       - name: Setup Debug Session
@@ -40,13 +39,8 @@ jobs:
       - name: Build
         run:  make s912-build
   
-  upload_files:
-      if: ${{ always() }}
-      needs: [build_base]
-      name: backup compiles file
-      runs-on: ubuntu-latest
-      steps:
       - name: Upload DL
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: dl-artifact
