@@ -32,12 +32,18 @@ jobs:
           sudo chown -R runner:docker dl/
           sudo umount -l /tmp
           
-  #    - name: Setup Debug Session
-  #      uses: csexton/debugger-action@master
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
-        
+  
+  upload_files:
+      if: ${{ always() }}
+      needs: [build_base]
+      name: backup compiles file
+      runs-on: ubuntu-latest
+      steps:
       - name: Upload DL
         uses: actions/upload-artifact@v3
         with:
