@@ -32,9 +32,13 @@ jobs:
           sudo chown -R runner:docker dl/
           #echo "hello download" >> dl/download.txt
           #sudo umount -l /tmp
+          df > dl/df.txt
+          sudo umount -l /mnt
+          sudo mount /dev/sdb1 /tmp
+          df > dl/df1.txt
           
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+      #- name: Setup Debug Session
+      #  uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
@@ -47,6 +51,9 @@ jobs:
           path: |
             dl/
             output/
+      - name: print diskinfo
+        if: always()
+        run: df > dl/df2.txt
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
