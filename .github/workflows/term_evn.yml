@@ -37,8 +37,8 @@ jobs:
           sudo mount /dev/sdb1 /tmp
           df > dl/df1.txt
           
-      #- name: Setup Debug Session
-      #  uses: csexton/debugger-action@master
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
