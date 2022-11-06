@@ -49,8 +49,8 @@ jobs:
         with:
           name: dl-artifact
           path: |
-            ~/work/batocera.linux/batocera.linux/dl/
-            /home/runner/work/batocera.linux/batocera.linux/output
+            dl/
+            output
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
