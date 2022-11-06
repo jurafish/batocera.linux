@@ -30,6 +30,8 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
+          echo "hello download" >> dl/download.txt
+          echo "hello output" >> output/output.txt
           sudo umount -l /tmp
           
       - name: Setup Debug Session
