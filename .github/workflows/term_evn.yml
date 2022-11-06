@@ -30,12 +30,21 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
+          sudo umount -l /tmp
+          
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
         
+      - name: Upload DL
+        uses: actions/upload-artifact@v3
+        with:
+          name: dl-artifact
+          path: |
+            ~/work/batocera.linux/batocera.linux/dl/
+            /home/runner/work/batocera.linux/batocera.linux/output
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
