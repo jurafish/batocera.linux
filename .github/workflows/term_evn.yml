@@ -30,8 +30,8 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
-          echo "hello download" >> dl/download.txt
-          sudo umount -l /tmp
+          #echo "hello download" >> dl/download.txt
+          #sudo umount -l /tmp
           
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
@@ -46,7 +46,7 @@ jobs:
           name: dl-artifact
           path: |
             dl/
-            output
+            output/
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
