@@ -44,7 +44,7 @@ jobs:
         run:  make s912-build
   
       - name: Upload DL
-        if: always()
+#        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: dl-artifact
@@ -52,7 +52,7 @@ jobs:
             dl/
             output/
       - name: print diskinfo
-        if: always()
+#        if: always()
         run: df > dl/df2.txt
         
 #      - name: Push image
