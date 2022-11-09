@@ -23,5 +23,4 @@ jobs:
           USER_PASS: ${{ secrets.USER_PASS }}
           
       - name: Sleep
-        if: ${{ failure() }}
         run: sleep 1h
