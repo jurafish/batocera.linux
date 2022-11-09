@@ -27,8 +27,8 @@ jobs:
           repository: jurafish/buildroot
           path: buildroot
           
-#      - name: Setup Debug Session
-#        uses: csexton/debugger-action@master
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
         
       - name: Makedir DL
         run: |
