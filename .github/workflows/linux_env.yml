@@ -10,7 +10,7 @@ env:
 
 jobs:
   build_base:
-    name: Build Term Env
+    name: Build Ssh Env
     runs-on: ubuntu-latest
     steps:          
       - name: Start SSH via Ngrok
@@ -21,6 +21,9 @@ jobs:
           NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }} 
           # This password you will use when authorizing via SSH 
           USER_PASS: ${{ secrets.USER_PASS }}
+          
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
           
       - name: Sleep
         run: sleep 1h
