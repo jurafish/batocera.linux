@@ -26,6 +26,10 @@ jobs:
         with:
           repository: jurafish/buildroot
           path: buildroot
+          
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
+        
       - name: Makedir DL
         run: |
           make dl-dir
@@ -47,8 +51,6 @@ jobs:
 #          # This password you will use when authorizing via SSH 
 #          USER_PASS: ${{ secrets.USER_PASS }}
           
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
           
       - name: Build
         run:  make s912-build
