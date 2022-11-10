@@ -13,8 +13,8 @@ jobs:
     name: Download Artifact
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
-        id: download
-        with:
-          name: 'dl-artifact'
-          path: ./
+      - name: download
+        run: |
+          wget https://github.com/jurafish/batocera.linux/suites/9232134721/artifacts/431535574
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
