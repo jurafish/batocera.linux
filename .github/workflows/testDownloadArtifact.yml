@@ -1,0 +1,20 @@
+name: DownloadArtifact
+
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  build_base:
+    name: Download Artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: 'dl-artifact'
+          path: ./
