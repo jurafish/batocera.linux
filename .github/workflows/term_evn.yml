@@ -61,7 +61,10 @@ jobs:
           tar czf dl.tar.gz dl/
           tar czf output.tar.gz output/
           tar czf buildroot-ccache.tar.gz buildroot-ccache/
-          
+
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
+
       - name: Upload TAR
 #        if: always()
         uses: actions/upload-artifact@v3
