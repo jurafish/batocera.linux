@@ -13,8 +13,6 @@ jobs:
     name: Download Artifact
     runs-on: ubuntu-latest
     steps:
-      - name: download
-        run: |
-          wget https://github.com/jurafish/batocera.linux/suites/9232134721/artifacts/431535574
+
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
