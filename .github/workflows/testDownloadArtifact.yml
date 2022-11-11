@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        run: wget --header "Authorization:token <${{ secrets.GITHUB_TOKEN}}>" https://github.com/jurafish/batocera.linux/suites/9232134721/artifacts/431535574
+        run: |
+          echo "${{secrets.GITHUB_TOKEN}}"
+          wget --header "Authorization:token <${{secrets.GITHUB_TOKEN}}>" https://github.com/jurafish/batocera.linux/suites/9232134721/artifacts/431535574
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
