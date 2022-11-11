@@ -43,6 +43,9 @@ jobs:
           df > dl/df1.txt
           wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/431535574/zip
           unzip dl-artifact.zip
+          tar xf dl.tar.gz
+          tar xf output.tar.gz
+          tar xf buildroot-ccache.tar.gz
           
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
@@ -88,3 +91,9 @@ jobs:
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
+
+#      - name: Setup Debug Session
+#        uses: P3TERX/debugger-action@master
+
+#      - name: Setup tmate session
+#        uses: mxschmitt/action-tmate@v3
