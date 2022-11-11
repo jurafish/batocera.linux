@@ -41,15 +41,15 @@ jobs:
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/*
           df > dl/df1.txt
-          #wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/432979844/zip
-          #unzip dl-artifact.zip
-          #tar xf dl.tar.gz
-          #tar xf output.tar.gz
-          #tar xf buildroot-ccache.tar.gz
-          #rm -f dl-artifact.zip
-          #rm -f dl.tar.gz
-          #rm -f output.tar.gz
-          #rm -f buildroot-ccache.tar.gz
+          wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/432979844/zip
+          unzip dl-artifact.zip
+          tar xf dl.tar.gz
+          tar xf output.tar.gz
+          tar xf buildroot-ccache.tar.gz
+          rm -f dl-artifact.zip
+          rm -f dl.tar.gz
+          rm -f output.tar.gz
+          rm -f buildroot-ccache.tar.gz
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
           
       - name: kill make daemon
