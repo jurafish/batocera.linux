@@ -51,7 +51,9 @@ jobs:
           rm -f output.tar.gz
           rm -f buildroot-ccache.tar.gz
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
-          sleep $(expr 60 \* 60 \* 5 + ${START_TIME}  - $(date "+%s")) && ( killall gcc || true ) || ( test $? == 143 && echo sleep canceld ) &
+          
+      - name: kill make daemon
+        run:  sleep $(expr 60 \* 60 \* 5 + ${START_TIME}  - $(date "+%s")) && ( killall gcc || true ) || ( test $? == 143 && echo sleep canceld ) &
           
 #      - name: Setup Debug Session
 #        uses: csexton/debugger-action@master
