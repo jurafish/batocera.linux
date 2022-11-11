@@ -53,25 +53,26 @@ jobs:
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
           
       - name: kill make daemon
-        run:  sleep $(expr 1 \* 60 \* 5 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
+        run:  sleep $(expr 60 \* 60 \* 5 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
           
 #      - name: Setup Debug Session
 #        uses: csexton/debugger-action@master
         
         
-      - name: Start SSH via Ngrok
-        run: curl -sL https://gist.githubusercontent.com/retyui/7115bb6acf151351a143ec8f96a7c561/raw/7099b9db76729dc5761da72aa8525f632d8875c9/debug-github-actions.sh | bash
-        env:
-          # After sign up on the https://ngrok.com/
-          # You can find this token here: https://dashboard.ngrok.com/get-started/setup
-          NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }} 
-          # This password you will use when authorizing via SSH 
-          USER_PASS: ${{ secrets.USER_PASS }}          
+#      - name: Start SSH via Ngrok
+#        run: curl -sL https://gist.githubusercontent.com/retyui/7115bb6acf151351a143ec8f96a7c561/raw/7099b9db76729dc5761da72aa8525f632d8875c9/debug-github-actions.sh | bash
+#        env:
+#          # After sign up on the https://ngrok.com/
+#          # You can find this token here: https://dashboard.ngrok.com/get-started/setup
+#          NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }} 
+#          # This password you will use when authorizing via SSH 
+#          USER_PASS: ${{ secrets.USER_PASS }}          
           
       - name: Build
         run:  make s912-build
           
       - name: tar upload file
+        if: always()
         run: |
           tar czf dl.tar.gz dl/
           tar czf output.tar.gz output/
@@ -87,7 +88,7 @@ jobs:
 #          USER_PASS: ${{ secrets.USER_PASS }}          
 
       - name: Upload TAR
-#        if: always()
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: dl-artifact
