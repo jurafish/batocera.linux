@@ -45,7 +45,7 @@ jobs:
           df > dl/df1.txt
       - name: Init CCache
         run: |
-          wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/432979844/zip
+          wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434039499/zip
           unzip dl-artifact.zip
           tar xf dl.tar.gz
           tar xf output.tar.gz
