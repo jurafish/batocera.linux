@@ -31,7 +31,7 @@ jobs:
           make dl-dir
           sudo chown -R runner:docker dl/
           df -h
-      - name: Maxmium Spare Space
+      - name: Maximum Spare Space
         run: |
           sudo umount -l /mnt
           sudo mount /dev/sdb1 /tmp
@@ -84,7 +84,7 @@ jobs:
           name: dl-artifact
           path: ./dl.tar.gz
 
-      - name: Tar output
+      - name: Tar Output
         run: |
           rm -f dl.tar.gz
           tar czf output.tar.gz output/
@@ -117,9 +117,6 @@ jobs:
 #          # This password you will use when authorizing via SSH 
 #          USER_PASS: ${{ secrets.USER_PASS }}          
         
-#      - name: Push image
-#        run: docker push batoceralinux/batocera.linux-build
-
 #      - name: Setup Debug Session
 #        uses: P3TERX/debugger-action@master
 
