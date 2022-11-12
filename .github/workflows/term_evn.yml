@@ -77,6 +77,7 @@ jobs:
         run: |
           tar czf dl.tar.gz dl/
           rm -rf dl/
+          df -h
 
       - name: Upload Tar Dl
         if: always()
@@ -91,6 +92,7 @@ jobs:
           rm -f dl.tar.gz
           tar czf output.tar.gz output/
           rm -rf output/
+          df -h
       
       - name: Upload Tar Output
         if: always()
@@ -104,6 +106,7 @@ jobs:
         run: |
           rm -f output.tar.gz
           tar czf buildroot-ccache.tar.gz buildroot-ccache/
+          df -h
 
       - name: Upload Tar Ccache
         if: always()
