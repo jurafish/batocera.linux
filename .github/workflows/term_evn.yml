@@ -1,6 +1,5 @@
 name: TermEnv
 
-
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -31,9 +30,7 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
-          #echo "hello download" >> dl/download.txt
-          #sudo umount -l /tmp
-          df > dl/df.txt
+          df -h
       - name: Maxmium Spare Space
         run: |
           sudo umount -l /mnt
@@ -42,7 +39,8 @@ jobs:
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/*
-          df > dl/df1.txt
+          df -h
+          
       - name: Init CCache
         run: |
           wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434039499/zip
@@ -60,8 +58,7 @@ jobs:
         run:  sleep $(expr 60 \* 60 \* 4 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
           
 #      - name: Setup Debug Session
-#        uses: csexton/debugger-action@master
-        
+#        uses: csexton/debugger-action@master        
         
 #      - name: Start SSH via Ngrok
 #        run: curl -sL https://gist.githubusercontent.com/retyui/7115bb6acf151351a143ec8f96a7c561/raw/7099b9db76729dc5761da72aa8525f632d8875c9/debug-github-actions.sh | bash
@@ -75,12 +72,41 @@ jobs:
       - name: Build
         run:  make s912-build
           
-      - name: Tar upload file
+      - name: Tar Dl
         if: always()
         run: |
           tar czf dl.tar.gz dl/
+
+      - name: Upload Tar Dl
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: dl-artifact
+          path: ./dl.tar.gz
+
+      - name: Tar output
+        run: |
+          rm -f dl.tar.gz
           tar czf output.tar.gz output/
+      
+      - name: Upload Tar Output
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: output-artifact
+          path: ./output.tar.gz
+      
+      - name: Tar Ccache
+        run: |
+          rm -f output.tar.gz
           tar czf buildroot-ccache.tar.gz buildroot-ccache/
+
+      - name: Upload Tar Ccache
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ccache-artifact
+          path: ./buildroot-ccache.tar.gz
 
 #      - name: Start SSH via Ngrok
 #        run: curl -sL https://gist.githubusercontent.com/retyui/7115bb6acf151351a143ec8f96a7c561/raw/7099b9db76729dc5761da72aa8525f632d8875c9/debug-github-actions.sh | bash
@@ -90,14 +116,6 @@ jobs:
 #          NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }} 
 #          # This password you will use when authorizing via SSH 
 #          USER_PASS: ${{ secrets.USER_PASS }}          
-
-      - name: Upload Tar File
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: dl-artifact
-          path: ./*.tar.gz
-
         
 #      - name: Push image
 #        run: docker push batoceralinux/batocera.linux-build
