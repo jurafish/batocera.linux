@@ -34,6 +34,8 @@ jobs:
           #echo "hello download" >> dl/download.txt
           #sudo umount -l /tmp
           df > dl/df.txt
+      - name: Maxmium Space
+        run: |
           sudo umount -l /mnt
           sudo mount /dev/sdb1 /tmp
           sudo chmod -R a+wr /tmp
@@ -41,6 +43,8 @@ jobs:
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/*
           df > dl/df1.txt
+      - name: Init Cache
+        run: |
           wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/432979844/zip
           unzip dl-artifact.zip
           tar xf dl.tar.gz
@@ -53,7 +57,7 @@ jobs:
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
           
       - name: kill make daemon
-        run:  sleep $(expr 60 \* 60 \* 5 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
+        run:  sleep $(expr 60 \* 60 \* 4 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
           
 #      - name: Setup Debug Session
 #        uses: csexton/debugger-action@master
@@ -71,7 +75,7 @@ jobs:
       - name: Build
         run:  make s912-build
           
-      - name: tar upload file
+      - name: Tar upload file
         if: always()
         run: |
           tar czf dl.tar.gz dl/
@@ -87,7 +91,7 @@ jobs:
 #          # This password you will use when authorizing via SSH 
 #          USER_PASS: ${{ secrets.USER_PASS }}          
 
-      - name: Upload TAR
+      - name: Upload Tar File
         if: always()
         uses: actions/upload-artifact@v3
         with:
