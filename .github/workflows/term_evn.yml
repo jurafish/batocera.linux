@@ -33,15 +33,15 @@ jobs:
 
       - name: Maximum Spare Space
         run: |
-          sudo umount -l /mnt
-          sudo mount /dev/sdb1 /tmp
-          sudo chmod -R a+wr /tmp
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/*
+          sudo umount -l /mnt
+          sudo mount /dev/sdb1 /tmp
+          sudo chmod -R a+wr /tmp
           df -hT
           
-      - name: Init CCache
+      - name: Init Output
         run: |
           #wget -nv -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434039499/zip
           #unzip dl-artifact.zip
@@ -53,13 +53,18 @@ jobs:
           df -hT
           tar xf output.tar.gz
           rm -f output.tar.gz
+          
+      - name: Init Ccache
+        run: |
           wget -nv -O ccache-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550120/zip
           df -hT
           unzip ccache-artifact.zip
           df -hT
           rm -f ccache-artifact.zip
+          df -hT
           tar xf buildroot-ccache.tar.gz
           rm -f buildroot-ccache.tar.gz
+
           #tar xf dl.tar.gz
           #rm -f dl.tar.gz
           
