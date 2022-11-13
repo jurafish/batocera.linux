@@ -49,18 +49,20 @@ jobs:
           df -hT
           unzip output-artifact.zip
           df -hT
+          rm -f output-artiface.zip
+          df -hT
+          tar xf output.tar.gz
+          rm -f output.tar.gz
           wget -nv -O ccache-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550120/zip
           df -hT
           unzip ccache-artifact.zip
           df -hT
-          #tar xf dl.tar.gz
-          tar xf output.tar.gz
-          tar xf buildroot-ccache.tar.gz
-          rm -f output-artifact.zip
           rm -f ccache-artifact.zip
-          #rm -f dl.tar.gz
-          rm -f output.tar.gz
+          tar xf buildroot-ccache.tar.gz
           rm -f buildroot-ccache.tar.gz
+          #tar xf dl.tar.gz
+          #rm -f dl.tar.gz
+          
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
           df -hT
           
