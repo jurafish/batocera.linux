@@ -30,7 +30,7 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
-          df -h
+
       - name: Maximum Spare Space
         run: |
           sudo umount -l /mnt
@@ -39,7 +39,7 @@ jobs:
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /opt/*
-          df -h
+          df -hT
           
       - name: Init CCache
         run: |
@@ -58,9 +58,10 @@ jobs:
           rm -f output.tar.gz
           rm -f buildroot-ccache.tar.gz
           echo "START_TIME=$(date '+%s')" >> $GITHUB_ENV
+          df -hT
           
       - name: Kill_Make Deamon
-        run:  sleep $(expr 60 \* 60 \* 4 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
+        run:  sleep $(expr 60 \* 60 \* 3.5 + ${START_TIME}  - $(date "+%s")) && ( killall make || true ) || ( test $? == 143 && echo sleep canceld ) &
           
 #      - name: Setup Debug Session
 #        uses: csexton/debugger-action@master        
@@ -82,7 +83,6 @@ jobs:
         run: |
           tar czf dl.tar.gz dl/
           rm -rf dl/
-          df -h
 
       - name: Upload Tar Dl
         if: always()
