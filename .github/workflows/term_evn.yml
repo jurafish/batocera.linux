@@ -30,6 +30,9 @@ jobs:
         run: |
           make dl-dir
           sudo chown -R runner:docker dl/
+          cd /
+          sudo du -d 2 |sort -nr |head -n 30
+
 
       - name: Maximum Spare Space
         run: |
@@ -39,10 +42,10 @@ jobs:
           sudo umount -l /mnt
           sudo mount /dev/sdb1 /tmp
           sudo chmod -R a+wr /tmp
-          df -hT
-
           cd /
           sudo du -d 2 |sort -nr |head -n 30
+
+          df -hT
 
           
       - name: Init Output
