@@ -40,6 +40,10 @@ jobs:
           sudo mount /dev/sdb1 /tmp
           sudo chmod -R a+wr /tmp
           df -hT
+          curdir=pwd
+          cd /
+          du -h -d 2
+          cd $(curdir)
           
       - name: Init Output
         run: |
@@ -48,20 +52,17 @@ jobs:
           wget -nv -O output-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550122/zip
           df -hT
           unzip output-artifact.zip -d /tmp/
-          df -hT
           rm -f output-artiface.zip
-          df -hT
           tar xf /tmp/output.tar.gz -C ./
           rm -f /tmp/output.tar.gz
+          df -hT
           
       - name: Init Ccache
         run: |
           wget -nv -O ccache-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550120/zip
           df -hT
           unzip ccache-artifact.zip -d /tmp/
-          df -hT
           rm -f ccache-artifact.zip
-          df -hT
           tar xf /tmp/buildroot-ccache.tar.gz -C ./
           rm -f /tmp/buildroot-ccache.tar.gz
 
