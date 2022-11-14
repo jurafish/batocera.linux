@@ -19,5 +19,7 @@ jobs:
           echo “------”
           #--header="Accept: application/vnd.github.v3+json" 
           #wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/431535574/zip
+#      - name: Setup Debug Session
+#        uses: csexton/debugger-action@master
       - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+        uses: P3TERX/debugger-action@master
