@@ -40,11 +40,10 @@ jobs:
           sudo mount /dev/sdb1 /tmp
           sudo chmod -R a+wr /tmp
           df -hT
-          echo "curdir=$(pwd)
-          echo $(curdir)
+
           cd /
           sudo du -d 2 |sort -nr |head -n 30
-          cd $(curdir)
+
           
       - name: Init Output
         run: |
