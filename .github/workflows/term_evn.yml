@@ -47,7 +47,7 @@ jobs:
           #unzip dl-artifact.zip
           wget -nv -O output-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550122/zip
           df -hT
-          unzip output-artifact.zip -d /tmp/output.tar.gz
+          unzip output-artifact.zip -d /tmp/
           df -hT
           rm -f output-artiface.zip
           df -hT
@@ -58,7 +58,7 @@ jobs:
         run: |
           wget -nv -O ccache-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/434550120/zip
           df -hT
-          unzip ccache-artifact.zip /tmp/ccache-artiface.tar.gz
+          unzip ccache-artifact.zip /tmp/
           df -hT
           rm -f ccache-artifact.zip
           df -hT
