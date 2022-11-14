@@ -41,8 +41,10 @@ jobs:
           sudo chmod -R a+wr /tmp
           df -hT
           curdir=pwd
+          echo curdir
+          echo $(curdir)
           cd /
-          du -h -d 2
+          sudo du -h -d 2 |sort -nr |head -n 30
           cd $(curdir)
           
       - name: Init Output
