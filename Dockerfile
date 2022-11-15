@@ -1,8 +1,5 @@
 FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
-RUN sudo sed -i "s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
-    && sudo sed -i "s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
-    && sudo apt-get update
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
 	apt-get install -y -o APT::Immediate-Configure=0 libc6:i386 \
@@ -60,5 +57,9 @@ ENV FORCE_UNSAFE_CONFIGURE 1
 
 RUN mkdir -p /build
 WORKDIR /build
+
+RUN sed -i "s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
+    && sed -i "s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
+    && apt-get update
 
 CMD ["/bin/bash"]
