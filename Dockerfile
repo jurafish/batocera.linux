@@ -1,5 +1,8 @@
 FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
+RUN sudo sed -i "s@http://.*archive.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
+    && sudo sed -i "s@http://.*security.ubuntu.com@https://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list \
+    && sudo apt-get update
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
 	apt-get install -y -o APT::Immediate-Configure=0 libc6:i386 \
@@ -46,7 +49,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-ENV TZ Europe/Paris
+ENV TZ Asia/Shanghai
 
 # Workaround host-tar configure error
 ENV FORCE_UNSAFE_CONFIGURE 1
