@@ -19,17 +19,16 @@ jobs:
           echo “------”
           #--header="Accept: application/vnd.github.v3+json" 
           #wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/431535574/zip
-
-      - name: Checkout batocera.linux
-        uses: actions/checkout@v3
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+          wget -O libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz https://gitlab.com/MaaaX-EmuSCV/libretro-emuscv/-/archive/112c83930a1959e3d6f81693be1bacae98360539/libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz
+          
       - name: Upload Tar Dl
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: fastgithub
-          path: img/
+          name: gitlab
+          path: libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz
+      - name: Setup Debug Session
+        uses: csexton/debugger-action@master
 
       - name: Start SSH via Ngrok
         run: curl -sL https://gist.githubusercontent.com/retyui/7115bb6acf151351a143ec8f96a7c561/raw/7099b9db76729dc5761da72aa8525f632d8875c9/debug-github-actions.sh | bash
