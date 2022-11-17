@@ -19,14 +19,14 @@ jobs:
           echo “------”
           #--header="Accept: application/vnd.github.v3+json" 
           #wget -O dl-artifact.zip --header="Authorization: token ${{secrets.GITHUB_TOKEN}}" https://api.github.com/repos/jurafish/batocera.linux/actions/artifacts/431535574/zip
-          wget -O libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz https://gitlab.com/MaaaX-EmuSCV/libretro-emuscv/-/archive/112c83930a1959e3d6f81693be1bacae98360539/libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz
+          wget -O solarus-v1.6.5.tar.bz2 https://gitlab.com/solarus-games/solarus/-/archive/v1.6.5/solarus-v1.6.5.tar.bz2
           
       - name: Upload Tar Dl
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: gitlab
-          path: libretro-emuscv-112c83930a1959e3d6f81693be1bacae98360539.tar.gz
+          name: solarus
+          path: solarus-v1.6.5.tar.bz2
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
 
